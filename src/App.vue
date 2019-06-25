@@ -17,6 +17,11 @@
         computed: {
             ...mapGetters(['isStart', 'isGame', 'isResult']),
         },
+        created() {
+            window.onbeforeunload = function() {
+                return "Yo, are you sure? You'll lose all progress!";
+            }
+        }
     }
 </script>
 
@@ -36,6 +41,7 @@
     }
 
     button {
+        border:none;
         &:active, &:focus {
             outline: none;
         }
@@ -48,5 +54,6 @@
         box-shadow: 0 1px 3px rgba(100, 100, 100, 0.3);
         position: relative;
         text-align: center;
+        background: #eee;
     }
 </style>

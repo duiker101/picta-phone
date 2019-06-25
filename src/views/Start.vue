@@ -1,18 +1,18 @@
 <template>
     <div class="wrapper">
-        <div class="header">Tell-e-phone</div>
+        <div class="header">PictoPhone</div>
 
         <div class="players">
-            Number of pass
+            Number of passes
             <h3>{{$store.state.playerCount}}</h3>
             <div class="controls">
-                <button @click="$store.state.playerCount++"><img src="@/assets/plus.svg"/></button>
-                <button @click="()=>{if($store.state.playerCount>2)$store.state.playerCount--}"><img
+                <button @click.prevent="$store.state.playerCount++"><img src="@/assets/plus.svg"/></button>
+                <button @click.prevent="()=>{if($store.state.playerCount>2)$store.state.playerCount--}"><img
                         src="@/assets/minus.svg"/></button>
             </div>
         </div>
         <div class="start">
-            <button @click="start">Start</button>
+            <button @click.prevent="start">Start</button>
         </div>
     </div>
 </template>
@@ -74,6 +74,7 @@
         button {
             border-radius: 10px;
             background: #42b983;
+            color: white;
             text-align: center;
             width: 150px;
             height: 70px;

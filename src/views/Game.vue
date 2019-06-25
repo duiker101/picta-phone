@@ -21,10 +21,10 @@
             return {drawing: true, current: []}
         },
         computed: {
-            ...mapGetters(['lastWord', 'lastDrawing', 'isFinished']),
+            ...mapGetters(['lastWord', 'isFinished']),
         },
         methods: {
-            ...mapActions(['addWord', 'addDrawing', 'nextStage', 'result']),
+            ...mapActions(['addWord', 'addImage', 'nextStage', 'result']),
             done() {
                 let segs = this.$refs.drawing.getSegments()
                 if (segs.length === 0) {
@@ -33,7 +33,7 @@
                 }
 
                 this.nextStage()
-                this.addDrawing(segs)
+                this.addImage(this.$refs.drawing.getImage())
 
                 if (this.isFinished)
                     this.result()
@@ -42,7 +42,7 @@
             },
             guess() {
                 let answer = prompt("What's your guess?")
-                if(!answer)
+                if (!answer)
                     return
                 this.$refs.drawing.clear()
                 this.addWord(answer)

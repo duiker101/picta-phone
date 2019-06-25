@@ -36,10 +36,12 @@
             this.$refs.canvas.width = this.$refs.board.offsetWidth;
             this.height = this.$refs.board.clientHeight;
             this.redraw()
+
+            this.$refs.canvas.addEventListener("touchmove", (e)=>e.preventDefault(), {passive: false});
         },
         methods: {
             startDrag(ev) {
-                if(!this.editable) return
+                if (!this.editable) return
                 this.dragging = true;
                 this.segments.push({lines: [], tool: this.tool})
                 this.addMove(ev)
@@ -63,6 +65,68 @@
             },
             getSegments() {
                 return this.segments;
+            },
+            getImage() {
+                let
+                    c = this.$refs.canvas,
+                    ctx = c.getContext('2d'),
+                    copy = document.createElement('canvas').getContext('2d'),
+                    pixels = ctx.getImageData(0, 0, c.width, c.height),
+                    l = pixels.data.length,
+                    i,
+                    bound = {
+                        top: null,
+                        left: null,
+                        right: null,
+                        bottom: null
+                    },
+                    x, y;
+
+                for (i = 0; i < l; i += 4) {
+                    if (pixels.data[i + 3] !== 0) {
+                        x = (i / 4) % c.width;
+                        y = ~~((i / 4) / c.width);
+
+                        if (bound.top === null) {
+                            bound.top = y;
+                        }
+
+                        if (bound.left === null) {
+                            bound.left = x;
+                        } else if (x < bound.left) {
+                            bound.left = x;
+                        }
+
+                        if (bound.right === null) {
+                            bound.right = x;
+                        } else if (bound.right < x) {
+                            bound.right = x;
+                        }
+
+                        if (bound.bottom === null) {
+                            bound.bottom = y;
+                        } else if (bound.bottom < y) {
+                            bound.bottom = y;
+                        }
+                    }
+                }
+
+                let padding = 10;
+                bound.top = Math.max(0, bound.top - padding)
+                bound.left = Math.max(0, bound.left - padding)
+                bound.right += padding
+                bound.bottom += padding
+
+                let trimHeight = bound.bottom - bound.top,
+                    trimWidth = bound.right - bound.left,
+                    trimmed = ctx.getImageData(bound.left, bound.top, trimWidth, trimHeight);
+
+
+                copy.canvas.width = trimWidth;
+                copy.canvas.height = trimHeight;
+                copy.putImageData(trimmed, 0, 0);
+
+                return copy.canvas.toDataURL('image/png')
             },
             redraw() {
                 let context = this.$refs.canvas.getContext('2d');

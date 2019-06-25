@@ -9,16 +9,11 @@ export default new Vuex.Store({
         timer: 0,
         stage: 0,
         drawings: [],
+        images: [],
         status: 0,
         words: []
     },
     getters: {
-        lastDrawing(state) {
-            if (state.drawings.length === 0)
-                return null
-
-            return state.drawings[state.drawings.length - 1]
-        },
         lastWord(state) {
             if (state.words.length === 0)
                 return null
@@ -43,7 +38,7 @@ export default new Vuex.Store({
 
             return state.words.map(function (v, i) {
                 let r = [v];
-                let d = state.drawings[i]
+                let d = state.images[i]
                 if (!!d)
                     r.push(d)
                 return r;
@@ -54,8 +49,8 @@ export default new Vuex.Store({
 
     },
     mutations: {
-        addDrawing(state, payload) {
-            state.drawings = [...state.drawings, payload]
+        addImage(state, payload) {
+            state.images = [...state.images, payload]
         },
         addWord(state, word) {
             state.words = [...state.words, word];
@@ -68,14 +63,14 @@ export default new Vuex.Store({
         },
         reset(state) {
             state.stage = 0;
-            state.drawings = [];
+            state.images = [];
             state.status = 0;
             state.words = [];
         }
     },
     actions: {
-        addDrawing({commit}, payload) {
-            commit('addDrawing', payload);
+        addImage({commit}, payload) {
+            commit('addImage', payload);
         },
         addWord({commit}, word) {
             commit('addWord', word);

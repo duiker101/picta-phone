@@ -1,14 +1,14 @@
 <template>
     <div class="wrapper">
         <div class="header">PictoPhone</div>
-
         <div class="players">
             Number of passes
             <h3>{{$store.state.playerCount}}</h3>
             <div class="controls">
                 <button @click.prevent="$store.state.playerCount++"><img src="@/assets/plus.svg"/></button>
-                <button @click.prevent="()=>{if($store.state.playerCount>2)$store.state.playerCount--}"><img
-                        src="@/assets/minus.svg"/></button>
+                <button @click.prevent="()=>{if($store.state.playerCount>2)$store.state.playerCount--}">
+                    <img src="@/assets/minus.svg"/>
+                </button>
             </div>
         </div>
         <div class="start">

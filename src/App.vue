@@ -1,29 +1,52 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <Start v-if="isStart"></Start>
+        <Game v-else-if="isGame"></Game>
+        <Result v-else-if="isResult"></Result>
     </div>
-    <router-view/>
-  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+    import Start from "./views/Start";
+    import {mapActions, mapGetters} from "vuex";
+    import Game from "./views/Game";
+    import Result from "./views/Result";
+
+    export default {
+        components: {Result, Game, Start},
+        computed: {
+            ...mapGetters(['isStart', 'isGame', 'isResult']),
+        },
     }
-  }
-}
+</script>
+
+<style lang="scss">
+    body, html {
+        padding: 0;
+        margin: 0;
+
+        height: 100%;
+        min-height: 100%;
+        font-family: Helvetica, sans-serif;
+    }
+
+    #app {
+        height: 100%;
+        min-height: 100%;
+    }
+
+    button {
+        &:active, &:focus {
+            outline: none;
+        }
+    }
+
+    .header {
+        height: 50px;
+        line-height: 50px;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 1px 3px rgba(100, 100, 100, 0.3);
+        position: relative;
+        text-align: center;
+    }
 </style>

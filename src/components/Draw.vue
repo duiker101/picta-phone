@@ -37,7 +37,13 @@
             this.height = this.$refs.board.clientHeight;
             this.redraw()
 
-            this.$refs.canvas.addEventListener("touchmove", (e)=>e.preventDefault(), {passive: false});
+            this.$refs.canvas.addEventListener("touchmove", (e) => e.preventDefault(), {passive: false});
+
+            window.onresize = (e) => {
+                this.$refs.canvas.width = this.$refs.board.offsetWidth;
+                this.height = this.$refs.board.clientHeight;
+                this.redraw()
+            };
         },
         methods: {
             startDrag(ev) {

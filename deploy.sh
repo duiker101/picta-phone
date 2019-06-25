@@ -17,6 +17,6 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f https://github.com/duiker101/picta-phone.git master:gh-pages
+git push -f https://github.com/duiker101/pictophone.git master:gh-pages
 
 cd -

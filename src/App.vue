@@ -48,8 +48,8 @@
     }
 
     .header {
-        height: 50px;
-        line-height: 50px;
+        height: 60px;
+        line-height: 60px;
         border-bottom: 1px solid #ddd;
         box-shadow: 0 1px 3px rgba(100, 100, 100, 0.3);
         position: relative;

@@ -2,8 +2,8 @@
     <div class="wrapper">
         <div class="header">Result
             <div class="buttons">
-                <button @click="start">Play Again</button>
-                <button @click="save">save</button>
+                <el-button type="primary" @click="start">Play Again</el-button>
+                <el-button type="primary" @click="save">save</el-button>
             </div>
         </div>
         <div ref="results">
@@ -17,12 +17,11 @@
 
 <script>
     import {mapActions, mapGetters} from "vuex";
-    import Drawing from "../components/Drawing";
     import html2canvas from "html2canvas";
 
     export default {
         props: {},
-        components: {Drawing},
+        components: {},
         data() {
             return {}
         },
@@ -54,14 +53,14 @@
         right: 0;
 
         .buttons {
-            button {
-                background: #42b983;
-                color: white;
-                padding: .8em;
-                font-size: .8em;
-                border-radius: 2px;
-                margin: .5em;
-            }
+            /*button {*/
+            /*    background: #42b983;*/
+            /*    color: white;*/
+            /*    padding: .8em;*/
+            /*    font-size: .8em;*/
+            /*    border-radius: 2px;*/
+            /*    margin: .5em;*/
+            /*}*/
 
             position: absolute;
             right: 0;

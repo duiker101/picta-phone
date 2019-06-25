@@ -5,14 +5,16 @@
             Number of passes
             <h3>{{$store.state.playerCount}}</h3>
             <div class="controls">
-                <button @click.prevent="$store.state.playerCount++"><img src="@/assets/plus.svg"/></button>
-                <button @click.prevent="()=>{if($store.state.playerCount>2)$store.state.playerCount--}">
+                <el-button @click.prevent="$store.state.playerCount++" circle>
+                    <img src="@/assets/plus.svg"/>
+                </el-button>
+                <el-button @click.prevent="()=>{if($store.state.playerCount>2)$store.state.playerCount--}" circle>
                     <img src="@/assets/minus.svg"/>
-                </button>
+                </el-button>
             </div>
         </div>
         <div class="start">
-            <button @click.prevent="start">Start</button>
+            <el-button type="success" @click.prevent="start">Start</el-button>
         </div>
     </div>
 </template>
@@ -28,11 +30,16 @@
         methods: {
             ...mapActions(['addWord', 'game']),
             start() {
-                let word = prompt('Choose a starting word')
-                if (!!word) {
-                    this.addWord(word)
-                    this.game()
-                }
+                this.$prompt('', 'Choose a starting word', {
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                }).then(({value, action}) => {
+                        if (!!value && action === 'confirm') {
+                            this.addWord(value)
+                            this.game()
+                        }
+                    }
+                )
             }
         }
 
@@ -54,15 +61,15 @@
         .controls {
 
             button {
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                background: #ddd;
-                margin: 1em;
+                /*border-radius: 50%;*/
+                /*width: 50px;*/
+                /*height: 50px;*/
+                /*background: #ddd;*/
+                /*margin: 1em;*/
 
-                &:active {
-                    background: #aaa;
-                }
+                /*&:active {*/
+                /*    background: #aaa;*/
+                /*}*/
             }
         }
     }
@@ -71,14 +78,14 @@
         align-self: center;
         text-align: center;
 
-        button {
-            border-radius: 10px;
-            background: #42b983;
-            color: white;
-            text-align: center;
+        .el-button {
+            /*    border-radius: 10px;*/
+            /*    background: #42b983;*/
+            /*    color: white;*/
+            /*    text-align: center;*/
             width: 150px;
             height: 70px;
-            line-height: 60px;
+            /*    line-height: 60px;*/
             font-size: 2rem;
         }
     }

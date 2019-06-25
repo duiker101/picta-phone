@@ -138,10 +138,10 @@
                     context.beginPath();
                     if (s.tool === 0) {
                         context.strokeStyle = "#fff";
-                        context.lineWidth = 20;
+                        context.lineWidth = 30;
                     } else {
                         context.strokeStyle = "#000";
-                        context.lineWidth = 5;
+                        context.lineWidth = 2;
                     }
                     // move to the beginning of the segment
                     if (s.lines.length > 0) {

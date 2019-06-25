@@ -4,8 +4,8 @@
             <span v-if="drawing">{{lastWord}}</span>
             <span v-else>What is this?</span>
 
-            <button @click="done" v-if="drawing">Done</button>
-            <button @click="guess" v-else>Guess</button>
+            <el-button type="primary" @click="done" v-if="drawing">Done</el-button>
+            <el-button type="primary" @click="guess" v-else>Guess</el-button>
         </div>
         <Draw ref="drawing" :editable="drawing" :segments.sync="current"/>
     </div>
@@ -28,7 +28,7 @@
             done() {
                 let segs = this.$refs.drawing.getSegments()
                 if (segs.length === 0) {
-                    alert("You didn't draw anything :(")
+                    this.$message({message: "You have to draw something! :(", type: 'error'})
                     return
                 }
 
@@ -41,17 +41,22 @@
                     this.drawing = false
             },
             guess() {
-                let answer = prompt("What's your guess?")
-                if (!answer)
-                    return
-                this.$refs.drawing.clear()
-                this.addWord(answer)
-                this.nextStage()
+                this.$prompt('', "What's your guess?", {
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                }).then(({value, action}) => {
+                        if (!!value && action === 'confirm') {
+                            this.$refs.drawing.clear()
+                            this.addWord(value)
+                            this.nextStage()
 
-                if (this.isFinished)
-                    this.result()
-                else
-                    this.drawing = true
+                            if (this.isFinished)
+                                this.result()
+                            else
+                                this.drawing = true
+                        }
+                    }
+                )
             }
         }
     }
@@ -67,11 +72,11 @@
 
     .header button {
         position: absolute;
-        height: 30px;
+        /*height: 30px;*/
         margin: 10px;
-        font-size: 1em;
+        /*font-size: 1em;*/
         right: 0;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+        /*border: 1px solid #ddd;*/
+        /*border-radius: 4px;*/
     }
 </style>

@@ -26,9 +26,9 @@ The game is simple:
 
  [@Duiker101](https://twitter.com/duiker101)
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+Distributed under the MIT license. See ``LICENSE`` for more information.
 
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+[https://github.com/duiker101](https://github.com/duiker101/)
 
 ## Contributing
 

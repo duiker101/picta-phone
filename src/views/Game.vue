@@ -1,12 +1,15 @@
 <template>
     <div class="wrapper">
-        <div class="header">
+        <NavBar>
             <span v-if="drawing">{{lastWord}}</span>
             <span v-else>What is this?</span>
 
-            <el-button type="primary" @click="done" v-if="drawing">Done</el-button>
-            <el-button type="primary" @click="guess" v-else>Guess</el-button>
-        </div>
+            <template slot="after">
+                <el-button type="primary" @click="done" v-if="drawing">Done</el-button>
+                <el-button type="primary" @click="guess" v-else>Guess</el-button>
+            </template>
+        </NavBar>
+
         <Draw ref="drawing" :editable="drawing" :segments.sync="current"/>
     </div>
 </template>
@@ -14,9 +17,10 @@
 <script>
     import {mapActions, mapGetters} from "vuex";
     import Draw from "../components/Draw";
+    import NavBar from "../components/NavBar";
 
     export default {
-        components: {Draw},
+        components: {Draw, NavBar},
         data() {
             return {drawing: true, current: []}
         },
@@ -63,20 +67,4 @@
 </script>
 
 <style lang='scss' scoped>
-    .wrapper {
-        height: 100%;
-        display: grid;
-
-        grid-template-rows: auto 1fr;
-    }
-
-    .header button {
-        position: absolute;
-        /*height: 30px;*/
-        margin: 10px;
-        /*font-size: 1em;*/
-        right: 0;
-        /*border: 1px solid #ddd;*/
-        /*border-radius: 4px;*/
-    }
 </style>

@@ -1,8 +1,8 @@
 <template>
-    <div id="app">
-        <Start v-if="isStart"></Start>
-        <Game v-else-if="isGame"></Game>
-        <Result v-else-if="isResult"></Result>
+    <div id="app" class="app">
+        <Start v-if="isStart"/>
+        <Game v-else-if="isGame"/>
+        <Result v-else-if="isResult"/>
     </div>
 </template>
 
@@ -18,7 +18,7 @@
             ...mapGetters(['isStart', 'isGame', 'isResult']),
         },
         created() {
-            window.onbeforeunload = function() {
+            window.onbeforeunload = function () {
                 return "Yo, are you sure? You'll lose all progress!";
             }
         }
@@ -35,25 +35,28 @@
         font-family: Helvetica, sans-serif;
     }
 
-    #app {
-        height: 100%;
-        min-height: 100%;
-    }
-
     button {
-        border:none;
+        border: none;
+
         &:active, &:focus {
             outline: none;
         }
     }
 
-    .header {
-        height: 60px;
-        line-height: 60px;
-        border-bottom: 1px solid #ddd;
-        box-shadow: 0 1px 3px rgba(100, 100, 100, 0.3);
-        position: relative;
-        text-align: center;
-        background: #eee;
+    main{
+        height: 100%;
+    }
+
+    .app {
+        min-height: 100%;
+        height: 100%;
+    }
+
+    .wrapper {
+        padding-top: 60px;
+        min-height: calc(100% - 60px);
+        height: calc(100% - 60px);
+        /*display: grid;*/
+        /*grid-template-rows: auto 1fr;*/
     }
 </style>

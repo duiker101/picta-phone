@@ -1,5 +1,5 @@
 <template>
-    <div class="board" ref="board">
+    <main ref="board">
         <div class="tools" v-if="editable">
             <button @click="tool=1" :class="{active:tool===1}"><img src="@/assets/pencil.svg"/></button>
             <button @click="tool=0" :class="{active:tool===0}"><img src="@/assets/eraser.svg"/></button>
@@ -11,7 +11,7 @@
                 v-touch:moving="addMove"
                 :height="height"
         />
-    </div>
+    </main>
 </template>
 
 <script>
@@ -51,7 +51,6 @@
                 this.dragging = true;
                 this.segments.push({lines: [], tool: this.tool})
                 this.addMove(ev)
-                // console.log(ev)
             },
             addMove(ev) {
                 if (this.dragging) {
@@ -170,12 +169,9 @@
         z-index: 2;
     }
 
-    .board {
-        overflow: hidden;
-    }
-
-    .board {
+    main {
         position: relative;
+        overflow: hidden;
     }
 
     .tools {

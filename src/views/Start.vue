@@ -1,29 +1,33 @@
 <template>
     <div class="wrapper">
-        <div class="header">PictoPhone</div>
-        <div class="players">
-            Number of passes
-            <h3>{{$store.state.playerCount}}</h3>
-            <div class="controls">
-                <el-button @click.prevent="$store.state.playerCount++" circle>
-                    <img src="@/assets/plus.svg"/>
-                </el-button>
-                <el-button @click.prevent="()=>{if($store.state.playerCount>2)$store.state.playerCount--}" circle>
-                    <img src="@/assets/minus.svg"/>
-                </el-button>
+        <NavBar>PictoPhone</NavBar>
+        <main>
+            <div></div>
+            <div class="players">
+                Number of passes
+                <h3>{{$store.state.playerCount}}</h3>
+                <div class="controls">
+                    <el-button @click.prevent="$store.state.playerCount++" circle>
+                        <img src="@/assets/plus.svg"/>
+                    </el-button>
+                    <el-button @click.prevent="()=>{if($store.state.playerCount>2)$store.state.playerCount--}" circle>
+                        <img src="@/assets/minus.svg"/>
+                    </el-button>
+                </div>
             </div>
-        </div>
-        <div class="start">
-            <el-button type="success" @click.prevent="start">Start</el-button>
-        </div>
+            <div class="start">
+                <el-button type="success" @click.prevent="start">Start</el-button>
+            </div>
+        </main>
     </div>
 </template>
 
 <script>
     import {mapActions, mapGetters} from "vuex";
+    import NavBar from "../components/NavBar";
 
     export default {
-        components: {},
+        components: {NavBar},
         computed: {
             ...mapGetters([]),
         },
@@ -47,31 +51,14 @@
 </script>
 
 <style lang='scss' scoped>
-    .wrapper {
-        height: 100%;
+    main{
         display: grid;
-        grid-template-rows: auto 2fr 1fr;
+        grid-template-rows: 1fr 5fr 4fr 3fr;
     }
-
     .players {
         align-self: center;
         text-align: center;
         font-size: 1.4rem;
-
-        .controls {
-
-            button {
-                /*border-radius: 50%;*/
-                /*width: 50px;*/
-                /*height: 50px;*/
-                /*background: #ddd;*/
-                /*margin: 1em;*/
-
-                /*&:active {*/
-                /*    background: #aaa;*/
-                /*}*/
-            }
-        }
     }
 
     .start {
@@ -79,13 +66,8 @@
         text-align: center;
 
         .el-button {
-            /*    border-radius: 10px;*/
-            /*    background: #42b983;*/
-            /*    color: white;*/
-            /*    text-align: center;*/
             width: 150px;
             height: 70px;
-            /*    line-height: 60px;*/
             font-size: 2rem;
         }
     }

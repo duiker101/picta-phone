@@ -1,16 +1,19 @@
 <template>
     <div class="wrapper">
-        <div class="header">Result
-            <div class="buttons">
-                <el-button type="primary" @click="start">Play Again</el-button>
-                <el-button type="primary" @click="save">save</el-button>
-            </div>
-        </div>
-        <div ref="results">
-            <div class="result" v-for="(r,i) in result">
+        <NavBar>
+            <template slot="before">
+                <el-button type="primary" @click="save">Save</el-button>
+            </template>
+            Result
+            <template slot="after">
+                <el-button type="success" @click="start">Play Again</el-button>
+            </template>
+        </NavBar>
+        <div class="results" ref="result">
+            <template v-for="(r,i) in result">
                 <span v-if="i%2===0">{{r}}</span>
                 <img v-else :src="r"/>
-            </div>
+            </template>
         </div>
     </div>
 </template>
@@ -18,10 +21,11 @@
 <script>
     import {mapActions, mapGetters} from "vuex";
     import html2canvas from "html2canvas";
+    import NavBar from "../components/NavBar";
 
     export default {
         props: {},
-        components: {},
+        components: {NavBar},
         data() {
             return {}
         },
@@ -46,39 +50,21 @@
 </script>
 
 <style lang='scss' scoped>
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-
-        .buttons {
-            /*button {*/
-            /*    background: #42b983;*/
-            /*    color: white;*/
-            /*    padding: .8em;*/
-            /*    font-size: .8em;*/
-            /*    border-radius: 2px;*/
-            /*    margin: .5em;*/
-            /*}*/
-
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
-    }
-
-    .wrapper {
-        padding-top: 50px;
-    }
-
-    .result {
+    .results {
         text-align: center;
-        margin: 1em;
 
         span {
             font-size: 1.5em;
             font-weight: 700;
+            text-transform: capitalize;
+            margin: 2em 1em .5em;
+            display: block;
+        }
+
+        img {
+            border: 1px solid rgba(100, 100, 100, 0.2);
+            border-radius: 10px;
+            box-shadow: 1px 1px 3px rgba(100, 100, 100, 0.5);
         }
     }
 </style>

@@ -36,8 +36,6 @@
     }
 
     button {
-        border: none;
-
         &:active, &:focus {
             outline: none;
         }
@@ -56,7 +54,5 @@
         padding-top: 60px;
         min-height: calc(100% - 60px);
         height: calc(100% - 60px);
-        /*display: grid;*/
-        /*grid-template-rows: auto 1fr;*/
     }
 </style>

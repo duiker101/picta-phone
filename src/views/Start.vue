@@ -34,6 +34,7 @@
         methods: {
             ...mapActions(['addWord', 'game']),
             start() {
+                // prompt the user to choose their first word
                 this.$prompt('', 'Choose a starting word', {
                     confirmButtonText: 'OK',
                     cancelButtonText: 'Cancel',

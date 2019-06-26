@@ -5,15 +5,23 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        // count of passes for a round
         playerCount: 5,
-        timer: 0,
+
+        // current index of the pass
         stage: 0,
-        drawings: [],
+
+        // Store of all the guesses
+        words: [],
+
+        // Store of all drawn images. As base64 image/png
         images: [],
+
+        // Current page. 0=start 1=game 2=result
         status: 0,
-        words: []
     },
     getters: {
+        // Last guess or first word
         lastWord(state) {
             if (state.words.length === 0)
                 return null
@@ -32,6 +40,14 @@ export default new Vuex.Store({
         isResult(state) {
             return state.status === 2
         },
+        /**
+         * Return an array with words and images merged alternated liked
+         * [word, image, word, image, ...]
+         * Useful since that's how we will render them
+         *
+         * @param state
+         * @returns {Array|*[]}
+         */
         result(state) {
             if (state.words.length <= 0)
                 return []

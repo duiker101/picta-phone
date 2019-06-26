@@ -1,9 +1,9 @@
 <template>
     <main ref="board">
         <div class="tools" v-if="editable">
-            <button @click="tool=1" :class="{active:tool===1}"><img src="@/assets/pencil.svg"/></button>
-            <button @click="tool=0" :class="{active:tool===0}"><img src="@/assets/eraser.svg"/></button>
-            <button @click="clear"><img src="@/assets/trash.svg"/></button>
+            <el-button circle @click="tool=1" :class="{active:tool===1}"><img src="@/assets/pencil.svg"/></el-button>
+            <el-button circle @click="tool=0" :class="{active:tool===0}"><img src="@/assets/eraser.svg"/></el-button>
+            <el-button circle @click="clear"><img src="@/assets/trash.svg"/></el-button>
         </div>
         <canvas ref="canvas"
                 v-touch:start="startDrag"
@@ -180,23 +180,23 @@
         top: 0;
         z-index: 2;
 
-        button {
+        .el-button {
             display: block;
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(150, 150, 150, 0.4);
-            border-radius: 50%;
             margin: 1em;
-            background: rgba(150, 150, 150, 0.4);
             box-shadow: 1px 1px 2px rgba(150, 150, 150, 0.2);
             opacity: .5;
 
             &.active {
                 opacity: 1;
+                background: rgba(64, 158, 255, 0.1);
             }
 
             &:active {
                 opacity: 1;
+            }
+
+            &:focus:not(.active) {
+                background: none;
             }
         }
     }

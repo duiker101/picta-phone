@@ -39,7 +39,6 @@
                     link.href = a.toDataURL('image/png')
                     link.click();
                 })
-
             }
         },
         computed: {
